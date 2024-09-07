@@ -7,7 +7,9 @@ The **Soundcloud DJ Parser** script is designed to help you gather email address
 
 To use the script, you need to have Python installed along with a few additional libraries. You can install these dependencies using `pip` by running the following command:
 
-```pip install selenium openpyxl```
+```bash
+pip install selenium openpyxl
+```
 
 Additionally, you'll need a Chrome WebDriver to run Selenium. Make sure it's installed and added to your system's PATH. You can download it here: [ChromeDriver](https://developer.chrome.com/docs/chromedriver?hl=ru#latest_chromedriver_binaries)
 
@@ -19,7 +21,9 @@ You can either run the script directly or provide the SoundCloud channel name as
 
 To specify the SoundCloud channel using the command line, run the script as follows:
 
-```python sc_dj_parser.py --name <soundcloud_channel>```
+```bash
+python sc_dj_parser.py --name <soundcloud_channel>
+```
 
 Replace <soundcloud_channel> with the technical name of the channel from the URL. For example, if the channel URL is https://soundcloud.com/bcco, the channel name would be bcco.
 
@@ -27,7 +31,9 @@ Replace <soundcloud_channel> with the technical name of the channel from the URL
 
 If you don't provide the SoundCloud channel name as a parameter, the script will prompt you to input it manually after starting.
 
-```python sc_dj_parser.py```
+```bash
+python sc_dj_parser.py
+```
 
 ## What the Script Does
 The script opens a Chrome browser using Selenium and scrapes the followers of the given SoundCloud channel.
@@ -37,9 +43,31 @@ The final Excel file is named after the SoundCloud channel and will contain the 
 Note: The script physically opens and navigates through SoundCloud pages using the Chrome browser. This is necessary for data scraping and is completely normal, so don’t be alarmed when Chrome opens during the process.
 
 ### Example:
-```python sc_dj_parser.py --name bcco```
+```bash
+python sc_dj_parser.py --name bcco
+```
 
 This command will parse the followers of the bcco SoundCloud channel and save the collected data to an Excel file called bcco.xlsx.
 
-## TODO
-Implement a secondary script that will merge all created Excel files into one, removing duplicate entries.
+## Merge Excel Files Script
+
+This script is designed to merge all Excel files created by the `SC DJ Parser` script into a single Excel file. It scans the current directory for all `.xlsx` files and combines them into one, ensuring no duplicate entries (based on `User URL` and `Email`). Once the merge is complete, the original Excel files are deleted, leaving only the final merged file.
+
+### How to Use
+
+1. Run the script:
+
+    ```bash
+    python merge_excel_files.py
+    ```
+
+2. After running, the script will:
+    - Collect all `.xlsx` files in the current directory (except any pre-existing merged files).
+    - Merge the contents of these files, ensuring no duplicate entries.
+    - Save the merged result into a new file called `dj_emails.xlsx`.
+    - Delete the original Excel files.
+
+### Notes
+
+- **Unique Entries:** The script considers an entry as unique based on the combination of `User URL` and `Email`.
+- **Output File:** The final merged file is named `dj_emails.xlsx`. If you run the script multiple times, any previously merged file will be updated with the new merged data, and old input files will be removed.
