@@ -94,7 +94,7 @@ def main(soundcloud_channel):
 
 # Entry point for the script using argparse
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="SoundCloud follower scraper.")
+    parser = argparse.ArgumentParser(description="SoundCloud DJ parser")
     parser.add_argument('--name', type=str, help='SoundCloud channel name (e.g., "bcco")')
     args = parser.parse_args()
     
